@@ -1,0 +1,14 @@
+[package]
+name = "tagger"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+lazy_static = "1.4.0"
+rusqlite = { version = "0.31.0", features = ["time"] }
+rusqlite_migration = {version = "1.2.0", features = ["from-directory"] }
+thiserror = "1.0.59"
+include_dir = "0.7.3"
+time = "0.3"
