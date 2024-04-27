@@ -22,7 +22,9 @@ enum Commands {
     },
     Update {},
     Scan {},
-    Search {},
+    Search {
+        tag: String,
+    },
 }
 
 fn path_to_string(path: PathBuf) -> Result<String> {
@@ -65,9 +67,14 @@ fn main() -> Result<()> {
             println!("This command would take a file, and update it's tags.")
         }
 
-        Commands::Search {} => {
-            println!("This command would use the tags to search for something")
-        }
+        Commands::Search { tag } => match app.get_tag(&tag) {
+            None => println!("This tag doesn't exist."),
+            Some(tag_id) => {
+                for file in app.get_files_for_tag(tag_id)? {
+                    println!("{}", file.file_name);
+                }
+            }
+        },
     }
 
     Ok(())
